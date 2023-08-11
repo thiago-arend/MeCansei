@@ -6,20 +6,25 @@ import ProductPage from "./pages/ProductPage";
 import CreateProductPage from "./pages/CreateProductPage";
 import ManageProductsPage from "./pages/ManageProductsPage";
 import WishlistPage from "./pages/WishlistPage";
+import { ChakraProvider } from "@chakra-ui/react";
+import BottomNavigationBar from "./components/BottomNavigationBar";
 
 export default function App() {
 
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<SigninPage />} />
-        <Route path="/cadastro" element={<SignupPage />} />
-        <Route path="/home" element={<HomePage />} />
-        <Route path="/produtos/:id" element={<ProductPage />} />
-        <Route path="/produtos/cadastrar" element={<CreateProductPage />} />
-        <Route path="/produtos/gerenciar" element={<ManageProductsPage />} />
-        <Route path="/wishlist" element={<WishlistPage />} />
-      </Routes>
-    </BrowserRouter>
+    <ChakraProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<SigninPage />} />
+          <Route path="/cadastro" element={<SignupPage />} />
+          <Route path="/home" element={<HomePage />} />
+          <Route path="/produtos/:id" element={<ProductPage />} />
+          <Route path="/produtos/cadastrar" element={<CreateProductPage />} />
+          <Route path="/produtos/gerenciar" element={<ManageProductsPage />} />
+          <Route path="/wishlist" element={<WishlistPage />} />
+        </Routes>
+        <BottomNavigationBar />
+      </BrowserRouter>
+    </ChakraProvider>
   )
 }
