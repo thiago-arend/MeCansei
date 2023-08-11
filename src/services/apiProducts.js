@@ -9,5 +9,15 @@ function createProduct(body, token) {
     return promise;
 }
 
-const apiProducts = { createProduct };
+function listProducts() {
+    const promise = axios.get(`${import.meta.env.VITE_API_URL}/products`);
+    return promise;
+}
+
+function getProduct(id) {
+    const promise = axios.get(`${import.meta.env.VITE_API_URL}/products/${id}`);
+    return promise;
+}
+
+const apiProducts = { getProduct, listProducts, createProduct };
 export default apiProducts;

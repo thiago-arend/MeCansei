@@ -66,8 +66,7 @@ export default function CreateProductPage() {
                         name="category"
                         value={form.category}
                         _placeholder={{ opacity: 1, color: 'black' }}
-                        onChange={(e) => handleForm(e, form, setForm)}
-                        required >
+                        onChange={(e) => handleForm(e, form, setForm)} >
 
                             <option value="CD">CD</option>
                             <option value="DVD">DVD</option>
