@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import { BottomNavbarStyle } from "./NavbarStyle";
+import { BottomNavbarStyle } from "../styles/NavbarStyle";
 
 export default function BottomNavigationBar() {
     const location = useLocation().pathname;

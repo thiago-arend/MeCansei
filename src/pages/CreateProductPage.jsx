@@ -1,31 +1,100 @@
-import { Button, Center, Container, Input, Stack } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
+import { Button, Center, Input, Select, Stack, Textarea } from "@chakra-ui/react";
+import { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import handleForm from "../functions/handleForm";
+import apiProducts from "../services/apiProducts";
+import { UserContext } from "../contexts/UserContext";
 
 export default function CreateProductPage() {
+    const [form, setForm] = useState({ name: "", description: "", photoUrl: "", category: "", currentPrice: "" });
+    const navigate = useNavigate();
+    const context = useContext(UserContext);
+
+    useEffect(() => {
+        const token = context.user.token;
+        if (!token) navigate("/home");
+    }, []);
+
+    function handleCadastro(e) {
+        e.preventDefault();
+
+        const token = context.user.token;
+
+        form.currentPrice = Number(form.currentPrice * 100);
+        apiProducts.createProduct(form, token)
+            .then(() => {
+                navigate("/home");
+            })
+            .catch(err => {
+                console.log(err.response.data);
+            });
+    }
+
     return (
         <PageContainer>
 
-            <Stack spacing={3}>
-                <PageCommand>Cadastre um produto!</PageCommand>
-                <Input placeholder="Nome" size="md" _placeholder={{ opacity: 1, color: 'black' }} />
-                <Input placeholder="Descrição" size="md" _placeholder={{ opacity: 1, color: 'black' }} />
-                <Input placeholder="Preço" size="md" _placeholder={{ opacity: 1, color: 'black' }} />
-                <Input placeholder="Categoria" size="md" _placeholder={{ opacity: 1, color: 'black' }} />
-                <Input placeholder="Foto" size="md" _placeholder={{ opacity: 1, color: 'black' }} />
+            <form onSubmit={handleCadastro}>
+                <Stack spacing={3}>
+                    <PageCommand>Cadastre um produto!</PageCommand>
+                    <Input
+                        type="text"
+                        name="name"
+                        value={form.name}
+                        placeholder="Nome"
+                        size="md"
+                        _placeholder={{ opacity: 1, color: 'black' }}
+                        onChange={(e) => handleForm(e, form, setForm)} />
+                    <Textarea
+                        placeholder="Descrição"
+                        name="description"
+                        value={form.description}
+                        _placeholder={{ opacity: 1, color: 'black' }}
+                        onChange={(e) => handleForm(e, form, setForm)} />
+                    <Input
+                        type="number"
+                        name="currentPrice"
+                        value={form.currentPrice}
+                        step={0.01}
+                        min={0.01}
+                        placeholder="Preço"
+                        size="md"
+                        _placeholder={{ opacity: 1, color: 'black' }}
+                        onChange={(e) => handleForm(e, form, setForm)} />
+                    <Select
+                        placeholder="Categoria"
+                        name="category"
+                        value={form.category}
+                        _placeholder={{ opacity: 1, color: 'black' }}
+                        onChange={(e) => handleForm(e, form, setForm)}
+                        required >
 
-                <Center height='5px'></Center>
+                            <option value="CD">CD</option>
+                            <option value="DVD">DVD</option>
+                            <option value="livro">Livro</option>
+                    </Select>
+                    <Input
+                        type="url"
+                        name="photoUrl"
+                        value={form.photoUrl}
+                        placeholder="Foto"
+                        size="md"
+                        _placeholder={{ opacity: 1, color: 'black' }}
+                        onChange={(e) => handleForm(e, form, setForm)} />
 
-                <Stack spacing={4} direction='row' align='center'>
-                    <Button colorScheme='teal' size='md'>
-                        Cadastrar
-                    </Button>
-                    <Button colorScheme='teal' size='md'>
-                        Apagar campos
-                    </Button>
-  
+                    <Center height='5px'></Center>
+
+                    <Stack spacing={4} direction='row' align='center'>
+                        <Button type="submit" colorScheme='teal' size='md'>
+                            Cadastrar
+                        </Button>
+                        <Button colorScheme='teal' size='md'>
+                            Apagar campos
+                        </Button>
+
+                    </Stack>
                 </Stack>
-            </Stack>
+            </form>
         </PageContainer>
     )
 }

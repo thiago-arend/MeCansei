@@ -8,11 +8,13 @@ import ManageProductsPage from "./pages/ManageProductsPage";
 import WishlistPage from "./pages/WishlistPage";
 import { ChakraProvider } from "@chakra-ui/react";
 import BottomNavigationBar from "./components/BottomNavigationBar";
+import UserProvider from "./contexts/UserContext";
 
 export default function App() {
 
   return (
     <ChakraProvider>
+      <UserProvider>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<SigninPage />} />
@@ -25,6 +27,7 @@ export default function App() {
         </Routes>
         <BottomNavigationBar />
       </BrowserRouter>
+      </UserProvider>
     </ChakraProvider>
   )
 }

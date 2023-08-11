@@ -5,7 +5,7 @@ export const BottomNavbarStyle = styled.div`
     height: 70px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-around;
     gap: 10px;
     background-color: #FFF6DC;
     color: #5B9A8B;

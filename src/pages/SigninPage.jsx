@@ -1,8 +1,38 @@
 import { Button, Center, Container, Input, Stack } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { UserContext } from "../contexts/UserContext";
+import apiAuth from "../services/apiAuth";
+import handleForm from "../functions/handleForm";
 
 export default function SigninPage() {
+    const { setUser } = useContext(UserContext);
+    const [form, setForm] = useState({ email: "", password: "" });
+    const navigate = useNavigate();
+    const context = useContext(UserContext);
+    
+    useEffect(() => {
+        const token = context.user.token;
+        if (token) navigate("/home");
+    }, []);
+
+    function handleLogin(e) {
+        e.preventDefault();
+
+        apiAuth.login(form)
+            .then(res => {
+                setUser(res.data); // token
+                localStorage.removeItem("user");
+                localStorage.setItem("user", JSON.stringify(res.data));
+
+                navigate("/home");
+            })
+            .catch(err => {
+                console.log(err.response.data);
+            });
+    }
+
     return (
         <PageContainer>
             <PageTitle>Me Cansei: </PageTitle>
@@ -10,24 +40,40 @@ export default function SigninPage() {
 
             <Center height='50px'></Center>
 
-            <Stack spacing={3}>
-                <PageCommand>Faça seu login!</PageCommand>
-                <Input placeholder="E-mail" size="md" _placeholder={{ opacity: 1, color: 'black' }} />
-                <Input placeholder="Senha" size="md" _placeholder={{ opacity: 1, color: 'black' }} />
+            <form onSubmit={handleLogin}>
+                <Stack spacing={3}>
+                    <PageCommand>Faça seu login!</PageCommand>
+                    <Input
+                        type="email"
+                        name="email"
+                        value={form.email}
+                        placeholder="E-mail"
+                        size="md"
+                        _placeholder={{ opacity: 1, color: 'black' }}
+                        onChange={(e) => handleForm(e, form, setForm)} />
+                    <Input
+                        type="password"
+                        name="password"
+                        value={form.password}
+                        placeholder="Senha"
+                        size="md"
+                        _placeholder={{ opacity: 1, color: 'black' }}
+                        onChange={(e) => handleForm(e, form, setForm)} />
 
-                <Center height='5px'></Center>
+                    <Center height='5px'></Center>
 
-                <Stack spacing={4} direction='row' align='center'>
-                    <Button colorScheme='teal' size='md'>
-                        Login
-                    </Button>
-                    <Link to="/cadastro">
-                        <Button colorScheme='teal' size='md'>
-                            Ainda não é cadastrado?
+                    <Stack spacing={4} direction='row' align='center'>
+                        <Button type="submit" colorScheme='teal' size='md'>
+                            Login
                         </Button>
-                    </Link>
+                        <Link to="/cadastro">
+                            <Button colorScheme='teal' size='md'>
+                                Ainda não é cadastrado?
+                            </Button>
+                        </Link>
+                    </Stack>
                 </Stack>
-            </Stack>
+            </form>
         </PageContainer>
     )
 }
