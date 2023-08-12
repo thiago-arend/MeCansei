@@ -11,7 +11,7 @@ export const productSchema = joi.object({
         "string.pattern.base": "O campo Preço deve conter apenas números, decimais ou não, e estritamente positivos!"
 
     }),*/
-    currentPrice: joi.string().cast('number'),
+    currentPrice: joi.any(),
     category: joi.string().valid("DVD", "CD", "livro").required().messages({
         "any.only": "Você deve selecionar uma entre as categorias disponíveis!",
         "string.empty": "O campo categoria deve ser preenchido!"
