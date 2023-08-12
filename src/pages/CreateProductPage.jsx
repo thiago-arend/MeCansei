@@ -6,6 +6,8 @@ import handleForm from "../functions/handleForm";
 import apiProducts from "../services/apiProducts";
 import { UserContext } from "../contexts/UserContext";
 import resetFormFields from "../functions/resetFormFields";
+import validateSchema from "../functions/validateSchema";
+import { productSchema } from "../schemas/product.schemas";
 
 export default function CreateProductPage() {
     const [form, setForm] = useState({ name: "", description: "", photoUrl: "", category: "", currentPrice: "" });
@@ -21,6 +23,14 @@ export default function CreateProductPage() {
         e.preventDefault();
 
         const token = context.user.token;
+
+        const validationErrors = validateSchema(productSchema, form);
+        if (validationErrors) {
+            let errorMsg = "";
+            validationErrors.forEach(e => errorMsg += e + "\n");
+            alert(errorMsg);
+            return;
+        }
 
         form.currentPrice = Number(form.currentPrice * 100);
         apiProducts.createProduct(form, token)
@@ -60,6 +70,7 @@ export default function CreateProductPage() {
                         min={0.01}
                         placeholder="Preço"
                         size="md"
+                        required
                         _placeholder={{ opacity: 1, color: 'black' }}
                         onChange={(e) => handleForm(e, form, setForm)} />
                     <Select

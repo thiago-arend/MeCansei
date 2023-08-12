@@ -5,6 +5,8 @@ import styled from "styled-components";
 import { UserContext } from "../contexts/UserContext";
 import apiAuth from "../services/apiAuth";
 import handleForm from "../functions/handleForm";
+import { signinSchema } from "../schemas/user.schemas";
+import validateSchema from "../functions/validateSchema";
 
 export default function SigninPage() {
     const { user, setUser } = useContext(UserContext);
@@ -17,6 +19,14 @@ export default function SigninPage() {
 
     function handleLogin(e) {
         e.preventDefault();
+
+        const validationErrors = validateSchema(signinSchema, form);
+        if (validationErrors) {
+            let errorMsg = "";
+            validationErrors.forEach(e => errorMsg += e + "\n");
+            alert(errorMsg);
+            return;
+        }
 
         apiAuth.login(form)
             .then(res => {
