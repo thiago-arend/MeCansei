@@ -11,7 +11,7 @@ export default function SigninPage() {
     const [form, setForm] = useState({ email: "", password: "" });
     const navigate = useNavigate();
     const context = useContext(UserContext);
-    
+
     useEffect(() => {
         const token = context.user.token;
         if (token) navigate("/home");

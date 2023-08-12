@@ -3,14 +3,14 @@ import dotenv from "dotenv";
 
 function createProduct(body, token) {
     const auth = {
-        headers: {Authorization: `Bearer ${token}`}
+        headers: { Authorization: `Bearer ${token}` }
     };
     const promise = axios.post(`${import.meta.env.VITE_API_URL}/products`, body, auth);
     return promise;
 }
 
-function listProducts() {
-    const promise = axios.get(`${import.meta.env.VITE_API_URL}/products`);
+function listProducts(query="") {
+    const promise = axios.get(`${import.meta.env.VITE_API_URL}/products${query}`);
     return promise;
 }
 
@@ -19,5 +19,22 @@ function getProduct(id) {
     return promise;
 }
 
-const apiProducts = { getProduct, listProducts, createProduct };
+function getMyProducts(token) {
+    const auth = {
+        headers: { Authorization: `Bearer ${token}` }
+    };
+    const promise = axios.get(`${import.meta.env.VITE_API_URL}/me/products`, auth);
+    return promise;
+}
+
+function updateProductAvailability(token, id){
+    const auth = {
+        headers: { Authorization: `Bearer ${token}` }
+    };
+    console.log(auth);
+    const promise = axios.post(`${import.meta.env.VITE_API_URL}/products/available/${id}`, auth);
+    return promise;
+}
+
+const apiProducts = { getMyProducts, updateProductAvailability, getProduct, listProducts, createProduct };
 export default apiProducts;

@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import handleForm from "../functions/handleForm";
 import apiAuth from "../services/apiAuth";
+import resetFormFields from "../functions/resetFormFields";
 
 export default function SignupPage() {
     const [form, setForm] = useState({ name: "", email: "", password: "", confirmPassword: "", cpf: "", phone: "" });
@@ -93,7 +94,7 @@ export default function SignupPage() {
                         <Button type="submit" colorScheme='teal' size='md'>
                             Cadastrar
                         </Button>
-                        <Button colorScheme='teal' size='md'>
+                        <Button onClick={() => resetFormFields(form, setForm)} colorScheme='teal' size='md'>
                             Apagar campos
                         </Button>
                     </Stack>

@@ -5,6 +5,7 @@ import styled from "styled-components";
 import handleForm from "../functions/handleForm";
 import apiProducts from "../services/apiProducts";
 import { UserContext } from "../contexts/UserContext";
+import resetFormFields from "../functions/resetFormFields";
 
 export default function CreateProductPage() {
     const [form, setForm] = useState({ name: "", description: "", photoUrl: "", category: "", currentPrice: "" });
@@ -87,7 +88,7 @@ export default function CreateProductPage() {
                         <Button type="submit" colorScheme='teal' size='md'>
                             Cadastrar
                         </Button>
-                        <Button colorScheme='teal' size='md'>
+                        <Button onClick={() => resetFormFields(form, setForm)} colorScheme='teal' size='md'>
                             Apagar campos
                         </Button>
 

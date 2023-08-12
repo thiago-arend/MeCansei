@@ -21,7 +21,7 @@ export default function ProductCard(props) {
                             R$ {(currentPrice / 100).toFixed(2).replace(".", ",")}
                         </Text>
                         <Text color='#5B9A8B' fontSize='sm'>
-                            {category}
+                            {category.toUpperCase()}
                         </Text>
                     </Stack>
                 </Stack>

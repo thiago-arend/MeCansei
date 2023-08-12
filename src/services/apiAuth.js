@@ -11,5 +11,14 @@ function signUp(body) {
     return promise;
 }
 
-const apiAuth = { login, signUp };
+function signOut(token) {
+    const auth = {
+        headers: { Authorization: `Bearer ${token}` }
+    };
+
+    const promise = axios.post(`${import.meta.env.VITE_API_URL}/auth/signout`, auth);
+    return promise;
+}
+
+const apiAuth = { signOut, login, signUp };
 export default apiAuth;

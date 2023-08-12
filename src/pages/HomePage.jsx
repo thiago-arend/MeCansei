@@ -5,13 +5,16 @@ import { Grid, Spinner } from "@chakra-ui/react";
 import ProductCard from "../components/ProductCard";
 import { Link } from "react-router-dom";
 
-export default function HomePage() {
-    const [products, setProducts] = useState(undefined);
-    console.log(products);
+export default function HomePage(props) {
+    const { products, setProducts, queryInput } = props;
 
     useEffect(() => {
-        apiProducts.listProducts()
+
+        let searchString = "";
+        if (queryInput) searchString = `?name=${queryInput}`
+        apiProducts.listProducts(searchString)
             .then((res) => {
+
                 setProducts(res.data);
             })
             .catch((err) => {
@@ -19,10 +22,18 @@ export default function HomePage() {
             })
     }, []);
 
+    if (products && products.length === 0) {
+        return (
+            <PageContainer>
+                Ainda não existem produtos na loja ou para o filtro selecionado...
+            </PageContainer>
+        )
+    }
+
     return (
         <PageContainer>
             <Grid
-                templateColumns="repeat(2, 1fr)"
+                templateColumns="repeat(1, 1fr)"
                 gap={3}
                 height="auto"
                 alignItems="center"
