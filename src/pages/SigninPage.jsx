@@ -7,14 +7,12 @@ import apiAuth from "../services/apiAuth";
 import handleForm from "../functions/handleForm";
 
 export default function SigninPage() {
-    const { setUser } = useContext(UserContext);
+    const { user, setUser } = useContext(UserContext);
     const [form, setForm] = useState({ email: "", password: "" });
     const navigate = useNavigate();
-    const context = useContext(UserContext);
 
     useEffect(() => {
-        const token = context.user.token;
-        if (token) navigate("/home");
+        if (user) navigate("/home");
     }, []);
 
     function handleLogin(e) {

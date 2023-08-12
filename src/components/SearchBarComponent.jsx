@@ -13,6 +13,7 @@ export default function SearchBarComponent(props) {
     const location = useLocation().pathname;
     const { setQueryInput, queryInput, setProducts } = props;
     const context = useContext(UserContext);
+    const {user, setUser} = useContext(UserContext)
     const navigate = useNavigate();
 
     function loadQuery(e, value) {
@@ -34,6 +35,7 @@ export default function SearchBarComponent(props) {
             apiAuth.signOut(context.user.token)
                 .then(() => {
                     localStorage.removeItem("user");
+                    setUser(undefined);
                     navigate("/");
                 })
                 .catch((err) => {

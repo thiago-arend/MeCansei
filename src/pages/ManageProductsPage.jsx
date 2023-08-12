@@ -7,6 +7,7 @@ import { UserContext } from "../contexts/UserContext";
 export default function ManageProductsPage() {
     const [products, setProducts] = useState(undefined);
     const [name, setName] = useState("");
+    const { user } = useContext(UserContext);
     const context = useContext(UserContext);
 
     function updateAvailability(id) {
@@ -20,6 +21,8 @@ export default function ManageProductsPage() {
     }
 
     useEffect(() => {
+        console.log(user);
+        if (!user) navigate("/");
 
         apiProducts.getMyProducts(context.user.token)
             .then((res) => {

@@ -16,7 +16,7 @@ function signOut(token) {
         headers: { Authorization: `Bearer ${token}` }
     };
 
-    const promise = axios.post(`${import.meta.env.VITE_API_URL}/auth/signout`, auth);
+    const promise = axios.post(`${import.meta.env.VITE_API_URL}/auth/signout`, {}, auth);
     return promise;
 }
 
