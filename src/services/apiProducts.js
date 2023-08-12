@@ -31,7 +31,7 @@ function updateProductAvailability(token, id){
     const auth = {
         headers: { Authorization: `Bearer ${token}` }
     };
-    console.log(auth);
+    console.log(`${import.meta.env.VITE_API_URL}/products/available/${id}`);
     const promise = axios.post(`${import.meta.env.VITE_API_URL}/products/available/${id}`, auth);
     return promise;
 }

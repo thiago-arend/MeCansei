@@ -53,9 +53,9 @@ export default function ManageProductsPage() {
             >
                 {
                     products.map((p) => (
-                        <Box padding="8px" borderRadius="8px" w="300px" h='40px' bg="#FFF6DC">
+                        <Box padding="8px" borderRadius="8px" w="330px" h='40px' bg="#FFF6DC">
                             <Stack alignItems="center" color="#5B9A8B" direction="row" justifyContent="space-between">
-                                <Box>{p.name}</Box>
+                                <Box>{`[${p.category}] - ${p.name}`}</Box>
                                 <Box><Checkbox 
                                     borderColor="#5B9A8B"
                                     onChange={() => updateAvailability(p.id)}
