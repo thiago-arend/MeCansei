@@ -5,7 +5,7 @@ import apiProducts from "../services/apiProducts";
 import { UserContext } from "../contexts/UserContext";
 
 export default function ManageProductsPage() {
-    const [products, setProducts] = useState(undefined);
+    const [products, setProducts] = useState([]);
     const [name, setName] = useState("");
     const { user } = useContext(UserContext);
     const context = useContext(UserContext);
@@ -26,27 +26,26 @@ export default function ManageProductsPage() {
 
         apiProducts.getMyProducts(context.user.token)
             .then((res) => {
-                setProducts(res.data[0].productsList);
-                setName(res.data[0].sellerName)
+                setProducts((res.data.productsList[0] === null) ? [] : res.data.productsList);
+                setName(res.data.sellerName);
             })
             .catch((err) => {
                 console.log(err.response.data);
             })
     }, []);
 
-    if (!products) {
-        return (
-            <PageContainer>
-                <Spinner size='xl' />
-            </PageContainer>
-        )
-    }
-
     return (
         <PageContainer>
-            <PageSubtitle >
-                Estes são os seus produtos, {name}
-            </PageSubtitle>
+            {(products.length !== 0)
+                ?
+                <PageSubtitle >
+                    Estes são os seus produtos, {name}
+                </PageSubtitle>
+                :
+                <PageSubtitle >
+                    Parece que você não cadastrou produtos ainda, {name}
+                </PageSubtitle>
+            }
             <Center height='20px'></Center>
             <Center height='20px'></Center>
             <VStack
@@ -59,7 +58,7 @@ export default function ManageProductsPage() {
                         <Box padding="8px" borderRadius="8px" w="330px" h='40px' bg="#FFF6DC">
                             <Stack alignItems="center" color="#5B9A8B" direction="row" justifyContent="space-between">
                                 <Box>{`[${p.category}] - ${p.name}`}</Box>
-                                <Box><Checkbox 
+                                <Box><Checkbox
                                     borderColor="#5B9A8B"
                                     onChange={() => updateAvailability(p.id)}
                                     defaultChecked={p.isAvailable ? true : false}>Disponível</Checkbox></Box>

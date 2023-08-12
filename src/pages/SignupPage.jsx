@@ -1,10 +1,12 @@
-import { Button, Center, Divider, Input, Stack } from "@chakra-ui/react";
+import { Alert, AlertIcon, Button, Center, Input, Stack, useToast } from "@chakra-ui/react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import handleForm from "../functions/handleForm";
 import apiAuth from "../services/apiAuth";
 import resetFormFields from "../functions/resetFormFields";
+import { signupSchema } from "../schemas/user.schemas";
+import validateSchema from "../functions/validateSchema";
 
 export default function SignupPage() {
     const [form, setForm] = useState({ name: "", email: "", password: "", confirmPassword: "", cpf: "", phone: "" });
@@ -12,6 +14,14 @@ export default function SignupPage() {
 
     function handleCadastro(e) {
         e.preventDefault();
+
+        const validationErrors = validateSchema(signupSchema, form);
+        if (validationErrors) {
+            let errorMsg = "";
+            validationErrors.forEach(e => errorMsg += e + "\n");
+            alert(errorMsg);
+            return;
+        }
 
         if (!passwordMatch(form.password, form.confirmPassword)) return alert("As senhas não são idênticas.");
         console.log(form);
@@ -49,7 +59,7 @@ export default function SignupPage() {
                         onChange={(e) => handleForm(e, form, setForm)} />
                     <Input
                         placeholder="E-mail"
-                        type="email"
+                        type="text"
                         name="email"
                         value={form.email}
                         size="md"
