@@ -38,6 +38,7 @@ export default function SigninPage() {
             })
             .catch(err => {
                 console.log(err.response.data);
+                alert("Senha ou e-mail incorretos!");
             });
     }
 
