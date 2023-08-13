@@ -1,13 +1,30 @@
-import { Card, CardBody, CardFooter, Divider, Heading, Image, Spinner, Stack, Text } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import { Box, Button, Card, CardBody, CardFooter, Divider, Heading, Image, Spinner, Stack, Text } from "@chakra-ui/react";
+import { useContext, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import apiProducts from "../services/apiProducts";
 import styled from "styled-components";
+import { UserContext } from "../contexts/UserContext";
+import apiWishlist from "../services/apiWishlist";
 
-export default function ProductPage() {
+export default function ProductPage(props) {
     const id = useLocation().pathname.split("/")[useLocation().pathname.split("/").length - 1];
     const [product, setProduct] = useState(undefined);
-    console.log(product);
+    const { user } = useContext(UserContext);
+    const { wishlistProducts, setWishlistProducts } = props;
+
+    function addToWishlist() {
+        const addTo = confirm(`Deseja adicionar ${product.name} à sua wishlist?`);
+        if (!addTo) return;
+
+        apiWishlist.insertProductIntoWishlist(user.token, id)
+            .then(() => {
+                setWishlistProducts([...wishlistProducts, product]);
+                alert(`Adicionado com sucesso!`);
+            })
+            .catch((err) => {
+                alert(err.response.data.message);
+            });
+    }
 
     useEffect(() => {
         apiProducts.getProduct(id)
@@ -38,7 +55,7 @@ export default function ProductPage() {
                                 {product.description}
                             </Text>
                             <Text color='#5B9A8B' fontSize='2xl'>
-                            R$ {(product.currentPrice / 100).toFixed(2).replace(".", ",")}
+                                R$ {(product.currentPrice / 100).toFixed(2).replace(".", ",")}
                             </Text>
                         </Stack>
                     </CardBody>
@@ -49,12 +66,21 @@ export default function ProductPage() {
                             <Text color='black' fontSize='md'>
                                 Entre em contato com o vendedor:
                             </Text>
-                            <Text color='#5B9A8B' fontSize='sm'>
-                                Nome: {product.sellerName}
-                            </Text>
-                            <Text color='#5B9A8B' fontSize='sm'>
-                                Telefone: {product.sellerPhone}
-                            </Text>
+                            <Stack direction="row" justifyContent="space-between">
+                                <Box>
+                                    <Text color='#5B9A8B' fontSize='sm'>
+                                        Nome: {product.sellerName}
+                                    </Text>
+                                    <Text color='#5B9A8B' fontSize='sm'>
+                                        Telefone: {product.sellerPhone}
+                                    </Text>
+                                </Box>
+
+                                <Button onClick={addToWishlist} colorScheme='teal' size='md'>
+                                    Wishlist
+                                </Button>
+                            </Stack>
+
                         </Stack>
                     </CardFooter>
                 </Card>}

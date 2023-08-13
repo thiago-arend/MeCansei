@@ -1,10 +1,30 @@
 import { Card, CardBody, Heading, Image, Stack, Text } from "@chakra-ui/react";
+import apiWishlist from "../services/apiWishlist";
+import { useContext } from "react";
+import { UserContext } from "../contexts/UserContext";
+import { useLocation } from "react-router-dom";
 
 export default function ProductCard(props) {
-    const { name, description, currentPrice, category, photoUrl } = props.product;
+    const { id, name, description, currentPrice, category, photoUrl } = props.product;
+    const {wishlistProducts, setWishlistProducts} = props;
+    const { user } = useContext(UserContext);
+    const location = useLocation();
+
+    function removeFromWishlist() {
+        const addTo = confirm(`Deseja remover ${name} da sua wishlist?`);
+        if (!addTo) return;
+
+        apiWishlist.deleteProductFromWishlist(user.token, id)
+            .then(() => {
+                setWishlistProducts(wishlistProducts.filter(p => p.id !== id));
+            })
+            .catch((err) => {
+                alert(err.response.data.message);
+            });
+    }
 
     return (
-        <Card size="sm">
+        <Card size="sm" onClick={(location.pathname === "/wishlist") ? removeFromWishlist : (() => {return})} >
             <CardBody align="center">
                 <Image
                     width="105px"

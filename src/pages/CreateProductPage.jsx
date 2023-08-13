@@ -10,7 +10,7 @@ import validateSchema from "../functions/validateSchema";
 import { productSchema } from "../schemas/product.schemas";
 
 export default function CreateProductPage() {
-    const [form, setForm] = useState({ name: "", description: "", photoUrl: "", category: "", currentPrice: "" });
+    const [form, setForm] = useState({ name: "", description: "", photoUrl: "", category: "", currentPrice: 0 });
     const navigate = useNavigate();
     const context = useContext(UserContext);
 
@@ -32,7 +32,7 @@ export default function CreateProductPage() {
             return;
         }
 
-        form.currentPrice = Number(form.currentPrice * 100);
+        form.currentPrice = Number(form.currentPrice) * 100;
         apiProducts.createProduct(form, token)
             .then(() => {
                 navigate("/home");

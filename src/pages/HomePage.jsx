@@ -14,7 +14,6 @@ export default function HomePage(props) {
         if (queryInput) searchString = `?name=${queryInput}`
         apiProducts.listProducts(searchString)
             .then((res) => {
-
                 setProducts(res.data);
             })
             .catch((err) => {
@@ -44,7 +43,9 @@ export default function HomePage(props) {
                         ?
                         <Spinner size='xl' />
                         :
-                        products.map((p) => <Link to={`/produtos/${p.id}`} ><ProductCard product={p} key={p.id} /></Link>)
+                        products.map((p) => <Link key={p.id} to={`/produtos/${p.id}`} >
+                                                <ProductCard product={p} />
+                                            </Link>)
                 }
 
             </Grid>

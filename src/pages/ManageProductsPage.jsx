@@ -8,10 +8,9 @@ export default function ManageProductsPage() {
     const [products, setProducts] = useState([]);
     const [name, setName] = useState("");
     const { user } = useContext(UserContext);
-    const context = useContext(UserContext);
 
     function updateAvailability(id) {
-        apiProducts.updateProductAvailability(context.user.token, id)
+        apiProducts.updateProductAvailability(user.token, id)
             .then(() => {
                 console.log("sucesso");
             })
@@ -21,10 +20,9 @@ export default function ManageProductsPage() {
     }
 
     useEffect(() => {
-        console.log(user);
         if (!user) navigate("/");
 
-        apiProducts.getMyProducts(context.user.token)
+        apiProducts.getMyProducts(user.token)
             .then((res) => {
                 setProducts((res.data.productsList[0] === null) ? [] : res.data.productsList);
                 setName(res.data.sellerName);
@@ -55,7 +53,7 @@ export default function ManageProductsPage() {
             >
                 {
                     products.map((p) => (
-                        <Box padding="8px" borderRadius="8px" w="330px" h='40px' bg="#FFF6DC">
+                        <Box key={p.id} padding="8px" borderRadius="8px" w="330px" h='40px' bg="#FFF6DC">
                             <Stack alignItems="center" color="#5B9A8B" direction="row" justifyContent="space-between">
                                 <Box>{`[${p.category}] - ${p.name}`}</Box>
                                 <Box><Checkbox
@@ -69,7 +67,6 @@ export default function ManageProductsPage() {
                 }
 
             </VStack>
-
         </PageContainer>
     )
 }
@@ -78,10 +75,7 @@ const PageContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-left: 0px;
-    margin-right: 0px;
-    margin-top: 30px;
-    margin-bottom: 70px;
+    margin: 80px 0;
     padding: 0 20px;
     text-align: center;
 `;

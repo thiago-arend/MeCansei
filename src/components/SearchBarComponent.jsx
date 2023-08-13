@@ -13,7 +13,7 @@ export default function SearchBarComponent(props) {
     const location = useLocation().pathname;
     const { setQueryInput, queryInput, setProducts } = props;
     const context = useContext(UserContext);
-    const {user, setUser} = useContext(UserContext)
+    const { user, setUser } = useContext(UserContext);
     const navigate = useNavigate();
 
     function loadQuery(e, value) {
@@ -45,23 +45,32 @@ export default function SearchBarComponent(props) {
     }
 
     return (
-        (location === "/home") &&
-            <SearchBar>
-                <VscAccount onClick={logOff} />
-                <Input
-                    width="240px"
-                    value={queryInput}
-                    type="text"
-                    onChange={(e) => {
-                        setQueryInput(e.target.value);
-                        loadQuery(e, e.target.value);
-                    }}
-                    borderColor="#5B9A8B"
-                    color="black"
-                    placeholder="Pesquise um item..."
-                    size="md"
-                    _placeholder={{ opacity: 1, color: 'black' }} />
-                <SearchBarFilter setProducts={setProducts} />
-            </SearchBar>
+        ((location === "/home") || (location === "/produtos/gerenciar") || (location === "/wishlist")) &&
+        <SearchBar>
+            <VscAccount onClick={logOff} />
+
+            {
+                (location === "/home")
+                    &&
+                    (
+                        <>
+                            <Input
+                                width="240px"
+                                value={queryInput}
+                                type="text"
+                                onChange={(e) => {
+                                    setQueryInput(e.target.value);
+                                    loadQuery(e, e.target.value);
+                                }}
+                                borderColor="#5B9A8B"
+                                color="black"
+                                placeholder="Pesquise um item..."
+                                size="md"
+                                _placeholder={{ opacity: 1, color: 'black' }} />
+                            <SearchBarFilter setProducts={setProducts} />
+                        </>
+                    )
+            }
+        </SearchBar>
     )
 }

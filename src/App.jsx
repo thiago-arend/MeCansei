@@ -15,6 +15,7 @@ import { useState } from "react";
 export default function App() {
   const [queryInput, setQueryInput] = useState("");
   const [products, setProducts] = useState(undefined);
+  const [wishlistProducts, setWishlistProducts] = useState([]);
 
   return (
     <ChakraProvider>
@@ -24,13 +25,13 @@ export default function App() {
           <Routes>
             <Route path="/" element={<SigninPage />} />
             <Route path="/cadastro" element={<SignupPage />} />
-            <Route path="/home" element={<HomePage queryInput={queryInput} products={products} setProducts={setProducts} />} />
-            <Route path="/produtos/:id" element={<ProductPage />} />
+            <Route path="/home" element={<HomePage wishlistProducts={wishlistProducts} setWishlistProducts={setWishlistProducts} queryInput={queryInput} products={products} setProducts={setProducts} />} />
+            <Route path="/produtos/:id" element={<ProductPage wishlistProducts={wishlistProducts} setWishlistProducts={setWishlistProducts} />} />
             <Route path="/produtos/cadastrar" element={<CreateProductPage />} />
             <Route path="/produtos/gerenciar" element={<ManageProductsPage />} />
-            <Route path="/wishlist" element={<WishlistPage />} />
+            <Route path="/wishlist" element={<WishlistPage wishlistProducts={wishlistProducts} setWishlistProducts={setWishlistProducts} />} />
           </Routes>
-          <BottomNavigationBar />
+          <BottomNavigationBar wishlistProducts={wishlistProducts} />
         </BrowserRouter>
       </UserProvider>
     </ChakraProvider>
