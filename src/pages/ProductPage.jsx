@@ -72,7 +72,7 @@ export default function ProductPage(props) {
                                         Nome: {product.sellerName}
                                     </Text>
                                     <Text color='#5B9A8B' fontSize='sm'>
-                                        Telefone: {product.sellerPhone}
+                                        Telefone: {`(${product.sellerPhone.slice(0, 2)}) ${product.sellerPhone.slice(2, 7)}-${product.sellerPhone.slice(7)}`}
                                     </Text>
                                 </Box>
 
