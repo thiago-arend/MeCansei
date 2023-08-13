@@ -10,7 +10,7 @@ import validateSchema from "../functions/validateSchema";
 import { productSchema } from "../schemas/product.schemas";
 
 export default function CreateProductPage() {
-    const [form, setForm] = useState({ name: "", description: "", photoUrl: "", category: "", currentPrice: 0 });
+    const [form, setForm] = useState({ name: "", description: "", photoUrl: "", category: "", currentPrice: "" });
     const navigate = useNavigate();
     const context = useContext(UserContext);
 
