@@ -45,7 +45,10 @@ export default function SearchBarComponent(props) {
     }
 
     return (
-        ((location === "/home") || (location === "/produtos/gerenciar") || (location === "/wishlist")) &&
+        ((location === "/home") || 
+        (location === "/produtos/gerenciar") || 
+        (location === "/wishlist") || 
+        (location === "/produtos/cadastrar")) &&
         <SearchBar>
             <VscAccount onClick={logOff} />
 

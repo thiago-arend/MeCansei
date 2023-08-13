@@ -118,25 +118,9 @@ const PageContainer = styled.div`
     font-family: 'Raleway', sans-serif;
     font-size: 24px;
     text-align: center;
-    margin: 30px 20px;
-    padding: 30px 0;
+    margin: 80px 0;
+    padding: 0 20px;
     border-radius: 20px;
-`;
-
-const PageTitle = styled.h1`
-    font-family: 'Raleway', sans-serif;
-    font-weight: 800;
-    font-size: 36px;
-    text-align: center;
-    color: #5B9A8B;
-`;
-
-const PageSubtitle = styled.h2`
-    font-family: 'Raleway', sans-serif;
-    font-weight: 800;
-    font-size: 28px;
-    text-align: center;
-    color: #5B9A8B;
 `;
 
 const PageCommand = styled.p`

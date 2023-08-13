@@ -10,12 +10,16 @@ import { ChakraProvider } from "@chakra-ui/react";
 import BottomNavigationBar from "./components/BottomNavigationBar";
 import UserProvider from "./contexts/UserContext";
 import SearchBarComponent from "./components/SearchBarComponent";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function App() {
   const [queryInput, setQueryInput] = useState("");
   const [products, setProducts] = useState(undefined);
   const [wishlistProducts, setWishlistProducts] = useState([]);
+
+  useEffect(() => {
+    setWishlistProducts([...wishlistProducts]);
+  }, []);
 
   return (
     <ChakraProvider>
