@@ -53,7 +53,7 @@ export default function ManageProductsPage() {
             >
                 {
                     products.map((p) => (
-                        <Box key={p.id} padding="8px" borderRadius="8px" w="330px" maxHeight='60px' bg="#FFF6DC">
+                        <Box key={p.id} padding="8px" borderRadius="8px" w="330px" maxH='60px' bg="#FFF6DC">
                             <Stack alignItems="center" color="#5B9A8B" direction="row" justifyContent="space-between">
                                 <Box>{`[${p.category}] - ${p.name}`}</Box>
                                 <Box><Checkbox
