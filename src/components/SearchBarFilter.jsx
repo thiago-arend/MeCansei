@@ -17,10 +17,7 @@ export default function SearchBarFilter(props) {
             .then((res) => {
 
                 setProducts(res.data);
-            })
-            .catch((err) => {
-                console.log(err.response.data);
-            })
+            });
     }
 
     return (

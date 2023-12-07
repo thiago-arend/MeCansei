@@ -30,10 +30,7 @@ export default function ProductPage(props) {
         apiProducts.getProduct(id)
             .then((res) => {
                 setProduct(res.data);
-            })
-            .catch((err) => {
-                console.log(err.response.data);
-            })
+            });
     }, []);
 
     return (

@@ -22,9 +22,6 @@ export default function SearchBarComponent(props) {
         apiProducts.listProducts(queryValue)
             .then((res) => {
                 setProducts(res.data);
-            })
-            .catch((err) => {
-                console.log(err.response.data);
             });
     }
 
@@ -36,10 +33,7 @@ export default function SearchBarComponent(props) {
                     localStorage.removeItem("user");
                     setUser(undefined);
                     navigate("/");
-                })
-                .catch((err) => {
-                    console.log(err.response.data);
-                })
+                });
         }
     }
 

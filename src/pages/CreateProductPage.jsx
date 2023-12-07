@@ -36,9 +36,6 @@ export default function CreateProductPage() {
         apiProducts.createProduct(form, token)
             .then(() => {
                 navigate("/home");
-            })
-            .catch(err => {
-                console.log(err.response.data);
             });
     }
 

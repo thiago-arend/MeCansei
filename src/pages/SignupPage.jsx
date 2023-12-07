@@ -24,14 +24,10 @@ export default function SignupPage() {
         }
 
         if (!passwordMatch(form.password, form.confirmPassword)) return alert("As senhas não são idênticas.");
-        console.log(form);
 
         apiAuth.signUp(form)
             .then(() => {
                 navigate("/");
-            })
-            .catch(err => {
-                console.log(err.response.data);
             });
     }
 

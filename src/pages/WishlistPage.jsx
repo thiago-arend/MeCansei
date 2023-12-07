@@ -15,10 +15,7 @@ export default function WishlistPage(props) {
             .then((res) => {
 
                 setWishlistProducts(res.data);
-            })
-            .catch((err) => {
-                console.log(err.response.data);
-            })
+            });
     }, []);
 
     if (wishlistProducts && wishlistProducts.length === 0) {

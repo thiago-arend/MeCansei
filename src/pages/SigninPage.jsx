@@ -37,7 +37,6 @@ export default function SigninPage() {
                 navigate("/home");
             })
             .catch(err => {
-                console.log(err.response.data);
                 alert("Senha ou e-mail incorretos!");
             });
     }

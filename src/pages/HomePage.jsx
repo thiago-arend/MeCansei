@@ -15,10 +15,7 @@ export default function HomePage(props) {
         apiProducts.listProducts(searchString)
             .then((res) => {
                 setProducts(res.data);
-            })
-            .catch((err) => {
-                console.log(err.response.data);
-            })
+            });
     }, []);
 
     if (products && products.length === 0) {

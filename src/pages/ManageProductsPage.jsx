@@ -12,10 +12,7 @@ export default function ManageProductsPage() {
     function updateAvailability(id) {
         apiProducts.updateProductAvailability(user.token, id)
             .then(() => {
-                console.log("sucesso");
-            })
-            .catch((err) => {
-                console.log(err.response.data);
+                return;
             });
     }
 
@@ -26,10 +23,7 @@ export default function ManageProductsPage() {
             .then((res) => {
                 setProducts((res.data.productsList[0] === null) ? [] : res.data.productsList);
                 setName(res.data.sellerName);
-            })
-            .catch((err) => {
-                console.log(err.response.data);
-            })
+            });
     }, []);
 
     return (
