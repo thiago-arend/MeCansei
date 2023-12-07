@@ -11,8 +11,8 @@ export default function ProductCard(props) {
     const location = useLocation();
 
     function removeFromWishlist() {
-        const addTo = confirm(`Deseja remover ${name} da sua wishlist?`);
-        if (!addTo) return;
+        const removeFrom = confirm(`Deseja remover ${name} da sua wishlist?`);
+        if (!removeFrom) return;
 
         apiWishlist.deleteProductFromWishlist(user.token, id)
             .then(() => {
