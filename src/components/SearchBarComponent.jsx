@@ -1,6 +1,5 @@
 import { Input } from "@chakra-ui/react";
 import { SearchBar } from "../styles/NavbarStyle";
-import { IoSearch, IoFunnelOutline } from "react-icons/io5";
 import { VscAccount } from "react-icons/vsc";
 import { useLocation, useNavigate } from "react-router-dom";
 import apiProducts from "../services/apiProducts";
@@ -13,7 +12,7 @@ export default function SearchBarComponent(props) {
     const location = useLocation().pathname;
     const { setQueryInput, queryInput, setProducts } = props;
     const context = useContext(UserContext);
-    const { user, setUser } = useContext(UserContext);
+    const { setUser } = useContext(UserContext);
     const navigate = useNavigate();
 
     function loadQuery(e, value) {

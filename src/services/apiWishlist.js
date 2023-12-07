@@ -1,14 +1,6 @@
 import axios from "axios";
 import dotenv from "dotenv";
 
-/*function createWishlist(token) {
-    const auth = {
-        headers: { Authorization: `Bearer ${token}` }
-    };
-    const promise = axios.post(`${import.meta.env.VITE_API_URL}/products/wishlist`, {}, auth);
-    return promise;
-}*/
-
 function insertProductIntoWishlist(token, prodId) {
     const auth = {
         headers: { Authorization: `Bearer ${token}` }

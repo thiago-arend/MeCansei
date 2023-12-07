@@ -1,4 +1,4 @@
-import { IconButton, Menu, MenuButton, MenuItem, MenuList, Select, filter } from "@chakra-ui/react";
+import { IconButton, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
 import { IoFunnelOutline } from "react-icons/io5";
 import apiProducts from "../services/apiProducts";
 
