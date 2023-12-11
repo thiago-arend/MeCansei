@@ -1,3 +1,10 @@
+# Me Cansei: O seu app para se livrar dos cacarecos
+
+## Sobre
+
+MeCansei é um aplicativo que você usa para vender cacarecos que não fazem mais sentido na sua casa.
+Você pode vender itens em três categorias diferentes: CD, DVD ou livro.
+
 ## Tecnologias utilizadas
 
 * React.js
