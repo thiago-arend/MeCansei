@@ -15,7 +15,7 @@ export default function SearchBarComponent(props) {
     const { setUser } = useContext(UserContext);
     const navigate = useNavigate();
 
-    function loadQuery(e, value) {
+    function setProductsFromQuery(e, value) {
         e.preventDefault();
 
         const queryValue = `?name=${value}`;
@@ -56,7 +56,7 @@ export default function SearchBarComponent(props) {
                                 type="text"
                                 onChange={(e) => {
                                     setQueryInput(e.target.value);
-                                    loadQuery(e, e.target.value);
+                                    setProductsFromQuery(e, e.target.value);
                                 }}
                                 borderColor="#5B9A8B"
                                 color="black"
