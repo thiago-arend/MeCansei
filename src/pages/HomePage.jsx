@@ -1,5 +1,5 @@
 import apiProducts from "../services/apiProducts";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import styled from "styled-components";
 import { Grid, Spinner } from "@chakra-ui/react";
 import ProductCard from "../components/ProductCard";

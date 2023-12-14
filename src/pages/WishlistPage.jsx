@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import styled from "styled-components";
 import { Grid, Spinner } from "@chakra-ui/react";
 import ProductCard from "../components/ProductCard";

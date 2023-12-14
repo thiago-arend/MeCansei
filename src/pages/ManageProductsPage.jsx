@@ -1,4 +1,4 @@
-import { Box, Center, Checkbox, Container, Divider, Heading, Spinner, Stack, StackDivider, VStack } from "@chakra-ui/react";
+import { Box, Center, Checkbox, Stack, StackDivider, VStack } from "@chakra-ui/react";
 import { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import apiProducts from "../services/apiProducts";
